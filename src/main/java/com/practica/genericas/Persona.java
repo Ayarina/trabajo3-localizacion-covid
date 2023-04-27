@@ -3,22 +3,13 @@ package com.practica.genericas;
 
 public class Persona {
 	private String nombre, apellidos, documento, email, direccion, cp;
+
 	FechaHora fechaNacimiento;
 
 	public Persona() {
 
 	}
 
-	public Persona(String nombre, String apellidos, String documento, String email, String direccion,
-			FechaHora fechaNacimiento) {
-		super();
-		this.nombre = nombre;
-		this.apellidos = apellidos;
-		this.documento = documento;
-		this.email = email;
-		this.direccion = direccion;
-		this.fechaNacimiento = fechaNacimiento;
-	}
 
 	public String getNombre() {
 		return nombre;

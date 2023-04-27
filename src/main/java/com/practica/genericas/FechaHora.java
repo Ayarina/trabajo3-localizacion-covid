@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 import java.util.Locale;
 
 public class FechaHora implements Comparable<FechaHora>{
-	public class Fecha {
+	public static class Fecha {
 		private int dia, mes, anio;
 		 
 		public Fecha(int dia, int mes, int anio) {
@@ -50,7 +50,7 @@ public class FechaHora implements Comparable<FechaHora>{
 
 	}
 
-	public class Hora {
+	public static class Hora {
 		private int hora, minuto;
 
 		public Hora(int hora, int minuto) {
@@ -92,10 +92,6 @@ public class FechaHora implements Comparable<FechaHora>{
 		this.hora = hora;
 	}
 
-	public FechaHora(int dia, int mes, int anio, int hora, int minuto) {
-		this.fecha = new Fecha(dia, mes, anio);
-		this.hora = new Hora(hora, minuto);
-	}
 
 	public Fecha getFecha() {
 		return fecha;
