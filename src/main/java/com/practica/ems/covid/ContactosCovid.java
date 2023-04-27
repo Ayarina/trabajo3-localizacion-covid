@@ -94,18 +94,18 @@ public class ContactosCovid {
 		FileReader fr = null;
 		BufferedReader br = null;
 		String datas[] = null, data = null;
-		loadDataFile(fichero, reset, archivo, fr, br, datas, data);
+		loadDataFile(fichero, reset, fr);
 		
 	}
 
 	@SuppressWarnings("resource")
-	public void loadDataFile(String fichero, boolean reset, File archivo, FileReader fr, BufferedReader br, String datas[], String data ) {
+	public void loadDataFile(String fichero, boolean reset, FileReader fr ) {
 		try {
 			// Apertura del fichero y creacion de BufferedReader para poder
 			// hacer una lectura comoda (disponer del metodo readLine()).
-			archivo = new File(fichero);
+			File archivo = new File(fichero);
 			fr = new FileReader(archivo);
-			br = new BufferedReader(fr);
+			BufferedReader br = new BufferedReader(fr);
 			if (reset) {
 				this.poblacion = new Poblacion();
 				this.localizacion = new Localizacion();
@@ -116,8 +116,9 @@ public class ContactosCovid {
 			 * tiene el tipo PERSONA o LOCALIZACION y cargo la línea de datos en la 
 			 * lista correspondiente. Sino viene ninguno de esos tipos lanzo una excepción
 			 */
+			String data;
 			while ((data = br.readLine()) != null) {
-				datas = dividirEntrada(data.trim());
+				String[] datas = dividirEntrada(data.trim());
 				for (String linea : datas) {
 					String datos[] = this.dividirLineaData(linea);
 					if (!datos[0].equals("PERSONA") && !datos[0].equals("LOCALIZACION")) {
@@ -288,7 +289,7 @@ public class ContactosCovid {
 		dia = Integer.parseInt(valores[0]);
 		mes = Integer.parseInt(valores[1]);
 		anio = Integer.parseInt(valores[2]);
-		FechaHora fechaHora = new FechaHora(dia, mes, anio, 0, 0);
+		FechaHora fechaHora = new FechaHora(new FechaHora.Fecha(dia, mes, anio), new FechaHora.Hora(0, 0));
 		return fechaHora;
 	}
 	
@@ -302,7 +303,7 @@ public class ContactosCovid {
 		valores = hora.split("\\:");
 		minuto = Integer.parseInt(valores[0]);
 		segundo = Integer.parseInt(valores[1]);
-		FechaHora fechaHora = new FechaHora(dia, mes, anio, minuto, segundo);
+		FechaHora fechaHora = new FechaHora(new FechaHora.Fecha(dia, mes, anio), new FechaHora.Hora(minuto, segundo));
 		return fechaHora;
 	}
 }

@@ -105,7 +105,7 @@ public class Localizacion {
 		dia = Integer.parseInt(valores[0]);
 		mes = Integer.parseInt(valores[1]);
 		anio = Integer.parseInt(valores[2]);
-		FechaHora fechaHora = new FechaHora(dia, mes, anio, 0, 0);
+		FechaHora fechaHora = new FechaHora(new FechaHora.Fecha(dia, mes, anio), new FechaHora.Hora(0, 0));
 		return fechaHora;
 	}
 	
@@ -119,7 +119,7 @@ public class Localizacion {
 		valores = hora.split("\\:");
 		minuto = Integer.parseInt(valores[0]);
 		segundo = Integer.parseInt(valores[1]);
-		FechaHora fechaHora = new FechaHora(dia, mes, anio, minuto, segundo);
+		FechaHora fechaHora = new FechaHora(new FechaHora.Fecha(dia, mes, anio), new FechaHora.Hora(minuto, segundo));
 		return fechaHora;
 	}
 	
