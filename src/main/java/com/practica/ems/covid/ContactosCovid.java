@@ -5,6 +5,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
@@ -81,7 +82,7 @@ public class ContactosCovid {
 			if (datos.length != Constantes.MAX_DATOS_PERSONA) {
 				throw new EmsInvalidNumberOfDataException("El número de datos para PERSONA es menor de 8");
 			}
-			this.poblacion.addPersona(this.crearPersona(datos));
+			this.poblacion.addPersona(Persona.parsePersona(datos));
 		}
 		if (datos[0].equals("LOCALIZACION")) {
 			if (datos.length != Constantes.MAX_DATOS_LOCALIZACION) {
@@ -190,37 +191,6 @@ public class ContactosCovid {
 	private String[] dividirLineaData(String data) {
 		String cadenas[] = data.split("\\;");
 		return cadenas;
-	}
-
-	private Persona crearPersona(String[] data) {
-		Persona persona = new Persona();
-		for (int i = 1; i < Constantes.MAX_DATOS_PERSONA; i++) {
-			String s = data[i];
-			switch (i) {
-			case 1:
-				persona.setDocumento(s);
-				break;
-			case 2:
-				persona.setNombre(s);
-				break;
-			case 3:
-				persona.setApellidos(s);
-				break;
-			case 4:
-				persona.setEmail(s);
-				break;
-			case 5:
-				persona.setDireccion(s);
-				break;
-			case 6:
-				persona.setCp(s);
-				break;
-			case 7:
-				persona.setFechaNacimiento(parsearFecha(s));
-				break;
-			}
-		}
-		return persona;
 	}
 
 	private PosicionPersona crearPosicionPersona(String[] data) {

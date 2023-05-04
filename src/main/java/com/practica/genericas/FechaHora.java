@@ -16,6 +16,19 @@ public class FechaHora implements Comparable<FechaHora>{
 			this.anio = anio;
 		}
 
+		public static  Fecha parseFecha(String data) throws IllegalArgumentException{
+			String[] valores = data.split("\\/");
+			if (valores.length != 3) {
+				throw new IllegalArgumentException("Formato de fecha incorrecto");
+			}
+
+			int dia = Integer.parseInt(valores[0]);
+			int mes = Integer.parseInt(valores[1]);
+			int anio = Integer.parseInt(valores[2]);
+
+			return new Fecha(dia, mes, anio);
+		}
+
 		public int getDia() {
 			return dia;
 		}
@@ -58,6 +71,17 @@ public class FechaHora implements Comparable<FechaHora>{
 			this.hora = hora;
 			this.minuto = minuto;
 		}
+		public static Hora parseHora(String data) throws IllegalArgumentException {
+			String[] valores = data.split("\\:");
+			if (valores.length != 2) {
+				throw new IllegalArgumentException("Formato de hora incorrecto");
+			}
+
+			int hora = Integer.parseInt(valores[0]);
+			int minuto = Integer.parseInt(valores[1]);
+
+			return new Hora(hora, minuto);
+		}
 
 		public int getHora() {
 			return hora;
@@ -90,6 +114,17 @@ public class FechaHora implements Comparable<FechaHora>{
 		super();
 		this.fecha = fecha;
 		this.hora = hora;
+	}
+	public static FechaHora parseFecha(String fecha) throws IllegalArgumentException{
+		Fecha date = Fecha.parseFecha(fecha);
+		Hora time = new Hora(0, 0);
+		return new FechaHora(date, time);
+	}
+
+	public static FechaHora parseFecha(String fecha, String hora) throws IllegalArgumentException{
+		Fecha date = Fecha.parseFecha(fecha);
+		Hora time = Hora.parseHora(hora);
+		return new FechaHora(date, time);
 	}
 
 
